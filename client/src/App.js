@@ -19,7 +19,7 @@ class App extends Component {
 
   handleSignUp(credentials) {
     const { username, password, confirmPassword } = credentials;
-    if (!username.trim() || !password.trim() ) {
+    if (!username.trim() || !password.trim()) {
       this.setState({
         signUpSignInError: "Must Provide All Fields"
       });
@@ -27,7 +27,7 @@ class App extends Component {
 
       fetch("/api/users", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials)
       }).then((res) => {
         return res.json();
@@ -55,9 +55,10 @@ class App extends Component {
 
   renderSignUpSignIn() {
     return (
-      <SignUpSignIn 
-        error={this.state.signUpSignInError} 
-        onSignUp={this.handleSignUp} 
+      <SignUpSignIn
+        error={this.state.signUpSignInError}
+        onSignUp={this.handleSignUp}
+        onSignIn={this.handleSignIn}
       />
     );
   }
@@ -81,12 +82,12 @@ class App extends Component {
     } else {
       whatToShow = this.renderSignUpSignIn();
     }
-       
+
     return (
       <BrowserRouter>
         <div className="App">
-          <TopNavbar 
-            showNavItems={this.state.authenticated} 
+          <TopNavbar
+            showNavItems={this.state.authenticated}
             onSignOut={this.handleSignOut} />
           {whatToShow}
         </div>
