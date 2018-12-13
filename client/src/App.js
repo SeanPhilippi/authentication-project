@@ -43,7 +43,26 @@ class App extends Component {
   }
 
   handleSignIn(credentials) {
-    // Handle Sign Up
+    fetch('/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials)
+    }).then(res => {
+      if (res.status === 401) {
+        this.setState({
+          signUpSignInError: 'Login is invalid'
+        })
+      } else {
+        return res.json();
+      }
+    }).then(data => {
+      const { token } = data;
+      localStorage.setItem('token', token);
+      this.setState({
+        signUpSignInError: '',
+        authenticated: token
+      })
+    })
   }
 
   handleSignOut() {
