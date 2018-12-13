@@ -12,13 +12,14 @@ class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSignin({
+    this.props.onSignIn({
       username: this.state.username,
       password: this.state.password
     });
   }
 
   render() {
+    console.log('props', this.props)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <FormGroup>

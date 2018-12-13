@@ -23,8 +23,11 @@ class App extends Component {
       this.setState({
         signUpSignInError: "Must Provide All Fields"
       });
+    } else if (password !== confirmPassword) {
+      this.setState({
+        signUpSignInError: "Password and Confirm Password do not match"
+      });
     } else {
-
       fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,6 +46,7 @@ class App extends Component {
   }
 
   handleSignIn(credentials) {
+    // this route doesn't yet exist
     fetch('/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -52,9 +56,7 @@ class App extends Component {
         this.setState({
           signUpSignInError: 'Login is invalid'
         })
-      } else {
-        return res.json();
-      }
+      } else res.json()
     }).then(data => {
       const { token } = data;
       localStorage.setItem('token', token);
