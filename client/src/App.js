@@ -30,17 +30,21 @@ class App extends Component {
       this.setState({
         signUpSignInError: "Password and Confirm Password do not match!"
       });
-    } else if () {
-      // TODO: 'The promise callback func should show error if username already exists
     } else {
       fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials)
-      }).then((res) => {
+      }).then(res => {
+        console.log('first then res: ', res);
         return res.json();
-      }).then((data) => {
+      }).then(data => {
+        console.log('second then data: ', data)
+        // destructuring data.token
         const { token } = data;
+        // setItem method on built in web api Storage object takes a key and value as parameters
+        // if the key/value pair doesn't exist, it is set, if the key exists, the value is overwritten 
+        // with new value
         localStorage.setItem("token", token);
         this.setState({
           signUpSignInError: "",
@@ -52,7 +56,7 @@ class App extends Component {
 
   handleSignIn(credentials) {
     // this route doesn't yet exist
-    fetch('/signin', {
+    fetch('/api/sessions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials)

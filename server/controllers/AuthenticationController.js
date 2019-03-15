@@ -1,26 +1,26 @@
 const User = require("../models/UserModel");
 const jwt = require("jwt-simple");
 
-function authentication(request, response,next) {
-  if(request.path.split("/")[1] !== "api")
+function authentication(req, res, next) {
+  if(req.path.split("/")[1] !== "api")
   {
     return next();
   }
   // get the token from the header
-  const tokenString = request.header("authorization");
+  const tokenString = req.header("authorization");
   if (!tokenString) {
-    return response.send("Invalid credentials");
+    return res.send("Invalid credentials");
   }
-  const tokenObject = jwt.decode(tokenString,process.env.SECRET);
+  const tokenObject = jwt.decode(tokenString, process.env.SECRET);
   // decrypt the token
   // find user by id
   User.findById(tokenObject.userId, function (err, user) {
-    if (err) { return response.send("Error"); }
+    if (err) { return res.send("Error"); }
     if (user) {
-      request.user = user;
+      req.user = user;
       return next();
     } 
-    return response.send("Invalid credentials");
+    return res.send("Invalid credentials");
   });
 }
 

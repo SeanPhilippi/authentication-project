@@ -12,8 +12,6 @@ window.fetch = (url, settings = {}) => {
     );
 };
 
-
-
 ReactDOM.render(
   <App />,
   document.getElementById("root")
