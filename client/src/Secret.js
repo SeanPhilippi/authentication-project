@@ -13,9 +13,10 @@ class Secret extends Component {
     const token = localStorage.getItem('token');
     fetch("/api/secret", {
       headers: {
-        'Authorization': token
+        'authorization': token
       }
     }).then(res => {
+      console.log('/api/secret, res: ', res)
       return res.text();
     }).then(data => {
       this.setState({

@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.mongodburi).then(
   () => { 
     console.log("mongoose connected successfully");
+    console.log(process.env.mongodburi)
    
     startWebServer();
   },

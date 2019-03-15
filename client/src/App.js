@@ -71,7 +71,7 @@ class App extends Component {
         this.setState({
           signUpSignInError: 'Login is invalid'
         })
-      } else res.json()
+      } else return res.json()
     }).then(data => {
       const { token } = data;
       localStorage.setItem('token', token);
