@@ -15,9 +15,9 @@ class Secret extends Component {
       headers: {
         'Authorization': token
       }
-    }).then((res) => {
+    }).then(res => {
       return res.text();
-    }).then((data) => {
+    }).then(data => {
       this.setState({
         message: data
       });

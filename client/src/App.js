@@ -107,10 +107,10 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <h1>I am protected!</h1>} />
           <Route exact path="/secret" component={Secret} />
-          <Route render={() => <h1>NOT FOUND!</h1>} />
           <Route exact path="/home" component={LandingPage} />
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
+          <Route render={() => <h1>NOT FOUND!</h1>} />
         </Switch>
       </div>
     );
