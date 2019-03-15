@@ -40,16 +40,22 @@ class App extends Component {
         return res.json();
       }).then(data => {
         console.log('second then data: ', data)
-        // destructuring data.token
-        const { token } = data;
-        // setItem method on built in web api Storage object takes a key and value as parameters
-        // if the key/value pair doesn't exist, it is set, if the key exists, the value is overwritten 
-        // with new value
-        localStorage.setItem("token", token);
-        this.setState({
-          signUpSignInError: "",
-          authenticated: token
-        });
+        if (data.error) {
+          this.setState({
+            signUpSignInError: data.error
+          });
+        } else {
+          // destructuring data.token
+          const { token } = data;
+          // setItem method on built in web api Storage object takes a key and value as parameters
+          // if the key/value pair doesn't exist, it is set, if the key exists, the value is overwritten 
+          // with new value
+          localStorage.setItem("token", token);
+          this.setState({
+            signUpSignInError: "",
+            authenticated: token
+          });
+        }
       });
     }
   }
