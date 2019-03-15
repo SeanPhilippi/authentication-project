@@ -4,6 +4,9 @@ import "./App.css";
 import SignUpSignIn from "./SignUpSignIn";
 import TopNavbar from "./TopNavbar";
 import Secret from "./Secret";
+import About from "./About";
+import Contact from "./Contact";
+import LandingPage from "./LandingPage";
 
 class App extends Component {
   constructor() {
@@ -21,12 +24,14 @@ class App extends Component {
     const { username, password, confirmPassword } = credentials;
     if (!username.trim() || !password.trim()) {
       this.setState({
-        signUpSignInError: "Must Provide All Fields"
+        signUpSignInError: "Must Provide All Fields!"
       });
     } else if (password !== confirmPassword) {
       this.setState({
-        signUpSignInError: "Password and Confirm Password do not match"
+        signUpSignInError: "Password and Confirm Password do not match!"
       });
+    } else if () {
+      // TODO: 'The promise callback func should show error if username already exists
     } else {
       fetch("/api/users", {
         method: "POST",
@@ -85,12 +90,17 @@ class App extends Component {
   }
 
   renderApp() {
+
+
     return (
       <div>
         <Switch>
           <Route exact path="/" render={() => <h1>I am protected!</h1>} />
           <Route exact path="/secret" component={Secret} />
           <Route render={() => <h1>NOT FOUND!</h1>} />
+          <Route exact path="/home" component={LandingPage} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} />
         </Switch>
       </div>
     );
